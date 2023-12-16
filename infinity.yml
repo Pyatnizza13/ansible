@@ -1,0 +1,31 @@
+---
+- name: ngnix and JAVA
+  hosts: My
+  become: True
+
+  tasks:
+    - name: Remove JDK
+      dnf:
+        pkg: java-1.8.0-openjdk
+        state: absent
+    - name: Create folder java
+      file:
+        path: /opt/dst/java
+        state: directory
+        owner: root
+        group: root
+        mode: 0755
+    - name: Download JDK 17 on RPM
+      get_url:
+        url: https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.rpm
+        dest: /opt/dst/java
+        owner: root
+        group: root
+        mode: 0744
+      ignore_errors: True
+
+    - name: Install JDK 17
+      dnf:
+        name: /opt/dst/java/jdk-17_linux-x64_bin.rpm
+        disable_gpg_check: true
+        state: present
