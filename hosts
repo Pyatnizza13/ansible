@@ -1,0 +1,8 @@
+[My]
+dragon.gkb6.local
+
+[serv]
+debian-pyatnizza.gkb6.local
+
+[all:vars]
+ansible_python_interpreter=/usr/bin/python3
