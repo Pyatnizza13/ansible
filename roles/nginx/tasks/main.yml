@@ -1,15 +1,17 @@
+
 ---
 # tasks file for nginx
-- name: add nginx repo 
+- name: add nginx repo
   yum_repository:
-    name=nginx repo
-    baseurl=https://nginx.org/packages/centos/$releasever/$basearch/
-    gpgcheck=0
-    enabled=1
+    name: nginx-repo
+    baseurl: https://nginx.org/packages/centos/7/x86_64/
+    gpgcheck: false
+    description: NGINX Off repo
+    enabled: true
 - name: nginx
   dnf:
-    name: nginx-1.24
-    state: latest
+    name: nginx-1.24.0
+    state: present
 - name: copy nginx conf file
   copy: src=files/nginx.conf dest=/etc/nginx/
 - name: copy index.html

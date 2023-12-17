@@ -1,3 +1,4 @@
+
 ---
 # tasks file for java_install
 - name: Download the JDK binaries
@@ -10,7 +11,10 @@
     src: "{{ jdk_download_location }}"
     dest: /opt
     remote_src: yes
-
+- name: Delete download file
+  file:
+    dest: "{{ jdk_download_location }}"
+    state: absent
 - name: Set the JAVA_HOME in /etc/profile file
   lineinfile:
     path: /etc/profile
@@ -22,3 +26,8 @@
 - name: Reload /etc/profile file
   shell:
     cmd: source /etc/profile
+- name: Java alternatives
+  alternatives:
+    name: java
+    path: /opt/jdk-17.0.2/bin/java
+    link: /usr/bin/java
