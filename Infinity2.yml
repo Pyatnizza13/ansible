@@ -6,7 +6,7 @@
   tasks:
     - name: Remove JDK
       package:
-        pkg: java-1.8.0
+        pkg: java-1.8.0-openjdk
         state: absent
         update_cache: true
     - name: nginx
