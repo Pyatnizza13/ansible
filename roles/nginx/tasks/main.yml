@@ -1,0 +1,21 @@
+---
+# tasks file for nginx
+- name: add nginx repo 
+  yum_repository:
+    name=nginx repo
+    baseurl=https://nginx.org/packages/centos/$releasever/$basearch/
+    gpgcheck=0
+    enabled=1
+- name: nginx
+  dnf:
+    name: nginx-1.24
+    state: latest
+- name: copy nginx conf file
+  copy: src=files/nginx.conf dest=/etc/nginx/
+- name: copy index.html
+  template: src=templates/index.html.j2 dest=/usr/share/nginx/html/index.html
+- name: Service nginx enabled
+  service:
+    name: nginx
+    state: started
+    enabled: yes
