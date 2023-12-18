@@ -2,21 +2,6 @@
 - name: JAVA and nginx
   hosts: My
   become: True
-
-  tasks:
-    - name: Remove JDK
-      dnf:
-        name: java-1.8.0-openjdk
-        state: absent
-        update_cache: true
-
-- name: Install JAVA 17
-  hosts: My
-  become: True
   roles:
-    - role: java_install
-- name: Install NGINX
-  hosts: My
-  become: True
-  roles:
-    - role: nginx
+    - java_install
+    - nginx
